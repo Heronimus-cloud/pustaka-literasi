@@ -1,59 +1,295 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📚 Pustaka Literasi
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Aplikasi Katalog Literasi dan Bacaan Umum Berbasis Laravel API dan Bootstrap**
 
-## About Laravel
+Pustaka Literasi merupakan aplikasi katalog buku yang dikembangkan untuk memudahkan pengguna dalam menjelajahi, mencari, dan mengelola koleksi bacaan umum. Aplikasi mengintegrasikan REST API Laravel dengan Open Library sebagai sumber metadata buku eksternal.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📌 Informasi Proyek
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| Keterangan | Detail |
+|---|---|
+| Mata Kuliah | Web Service |
+| Pertemuan | 10 |
+| Kelompok | 4 |
+| Fokus | Literasi dan Bacaan Umum |
+| Framework | Laravel 12 |
+| Frontend | Bootstrap 5.3 |
+| Database | SQLite |
+| API Eksternal | Open Library |
+| Autentikasi | Laravel Sanctum |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ✨ Fitur Aplikasi
 
-## Learning Laravel
+### 1. Katalog Buku
+- Menampilkan daftar koleksi buku.
+- Melihat detail buku.
+- Mencari buku berdasarkan judul, penulis, atau kode buku.
+- Filter berdasarkan kategori.
+- Filter berdasarkan bahasa.
+- Pagination dengan 8 buku per halaman.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 2. Integrasi Open Library
+- Mencari referensi buku melalui Open Library.
+- Menampilkan metadata judul, penulis, tahun terbit, dan sampul.
+- Memilih hasil pencarian untuk mengisi formulir buku.
+- Menyimpan buku terpilih ke database lokal melalui akun admin.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Open Library digunakan sebagai sumber pencarian metadata. Operasi CRUD tetap dilakukan pada database aplikasi Pustaka Literasi.
 
-## Laravel Sponsors
+### 3. Manajemen Buku (CRUD)
+Admin dapat:
+- Menambahkan buku.
+- Melihat detail buku.
+- Mengubah informasi buku.
+- Menghapus buku.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Setiap data buku melewati proses validasi, termasuk pemeriksaan kode buku unik dan sumber Open Library yang tidak boleh duplikat.
 
-### Premium Partners
+### 4. Autentikasi dan Hak Akses
+Aplikasi menyediakan dua jenis pengguna:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+| Hak Akses | Admin | Anggota |
+|---|---|---|
+| Melihat katalog | Ya | Ya |
+| Mencari buku | Ya | Ya |
+| Melihat detail | Ya | Ya |
+| Menambahkan buku | Ya | Tidak |
+| Mengubah buku | Ya | Tidak |
+| Menghapus buku | Ya | Tidak |
 
-## Contributing
+Autentikasi menggunakan Laravel Sanctum dengan Bearer Token yang berlaku selama 8 jam.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 5. Statistik Koleksi
+Halaman utama menampilkan:
+- Total buku.
+- Total stok buku.
+- Jumlah jenis bahasa dalam koleksi.
 
-## Code of Conduct
+Statistik dihitung berdasarkan data yang tersimpan dalam database.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 6. Pengembangan Khusus Kelompok 4
+Pengembangan tambahan yang diterapkan:
 
-## Security Vulnerabilities
+- **Field database:** bahasa.
+- **Filter backend:** pencarian koleksi berdasarkan bahasa.
+- **Ringkasan halaman:** jumlah bahasa yang tersedia dalam koleksi.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Pengembangan tersebut dihubungkan melalui migration, model, validasi, controller, respons API, dan antarmuka pengguna.
 
-## License
+## 🛠️ Teknologi yang Digunakan
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- PHP 8.3
+- Laravel 12
+- Laravel Sanctum
+- SQLite
+- Bootstrap 5.3
+- JavaScript
+- Open Library Search API
+- Postman
+- Git dan GitHub
+
+## 🔄 Alur Kerja Sistem
+
+1. Pengguna membuka halaman Pustaka Literasi.
+2. Browser meminta daftar buku kepada REST API Laravel.
+3. Laravel mengambil data koleksi dari database SQLite.
+4. Data dikirim kembali dalam format JSON.
+5. JavaScript menampilkan data menggunakan komponen Bootstrap.
+6. Pengguna dapat mencari metadata buku melalui Open Library.
+7. Admin memilih buku yang diinginkan.
+8. Metadata digunakan untuk mengisi formulir buku.
+9. Admin menyimpan buku melalui endpoint CRUD Laravel.
+10. Laravel memvalidasi dan menyimpan data ke database lokal.
+
+## 🔌 Daftar Endpoint REST API
+
+Base URL:
+
+`http://127.0.0.1:8000/api/v1`
+
+| Method | Endpoint | Fungsi | Akses |
+|---|---|---|---|
+| GET | `/books` | Daftar buku | Publik |
+| GET | `/books/{id}` | Detail buku | Publik |
+| GET | `/stats` | Statistik koleksi | Publik |
+| GET | `/open-library?q=` | Pencarian Open Library | Publik |
+| POST | `/auth/login` | Login pengguna | Publik |
+| GET | `/auth/me` | Identitas pengguna | Token |
+| POST | `/auth/logout` | Logout pengguna | Token |
+| POST | `/books` | Tambah buku | Admin |
+| PATCH | `/books/{id}` | Ubah buku | Admin |
+| DELETE | `/books/{id}` | Hapus buku | Admin |
+
+Parameter pencarian katalog:
+- `q`: kata kunci judul, penulis, atau kode.
+- `kategori`: filter kategori.
+- `bahasa`: filter bahasa.
+- `page`: nomor halaman.
+- `per_page`: jumlah data per halaman, default 8 dan maksimum 50.
+
+## 🗄️ Struktur Data Buku
+
+| Field | Keterangan |
+|---|---|
+| id | Identitas buku |
+| kode | Kode buku unik |
+| judul | Judul buku |
+| penulis | Nama penulis |
+| tahun | Tahun terbit |
+| kategori | Kategori buku |
+| stok | Jumlah stok |
+| open_library_key | Identitas buku dari Open Library |
+| cover_id | Identitas sampul buku |
+| bahasa | Bahasa buku |
+
+## 🚀 Instalasi dan Menjalankan Proyek
+
+### Persyaratan
+- PHP 8.3 atau versi kompatibel dengan Laravel 12.
+- Composer.
+- Git.
+- SQLite dan ekstensi `pdo_sqlite`.
+- Browser.
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/Heronimus-cloud/pustaka-literasi.git
+```
+
+Masuk ke direktori proyek:
+
+```bash
+cd pustaka-literasi
+```
+
+### 2. Instalasi Dependensi
+
+```bash
+composer install
+```
+
+### 3. Konfigurasi Environment
+
+Salin file konfigurasi:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Buat database SQLite apabila belum tersedia:
+
+```powershell
+if (!(Test-Path "database/database.sqlite")) {
+    New-Item -ItemType File -Path "database/database.sqlite"
+}
+```
+
+Buka file `.env`, kemudian sesuaikan konfigurasi berikut:
+
+```env
+APP_NAME="Pustaka Literasi"
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://127.0.0.1:8000
+
+DB_CONNECTION=sqlite
+
+SEED_ADMIN_EMAIL=admin@example.test
+SEED_ADMIN_PASSWORD=GantiPasswordAdmin
+
+SEED_MEMBER_EMAIL=anggota@example.test
+SEED_MEMBER_PASSWORD=GantiPasswordAnggota
+```
+
+Gunakan kredensial lokal masing-masing. Jangan mengunggah file `.env` ke GitHub.
+
+### 4. Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+### 5. Migrasi dan Seeder
+
+```bash
+php artisan config:clear
+php artisan migrate --seed
+```
+
+Perintah tersebut membuat struktur database, akun demo, dan data awal buku.
+
+### 6. Jalankan Aplikasi
+
+```bash
+php artisan serve
+```
+
+Buka browser:
+
+`http://127.0.0.1:8000`
+
+## 🔐 Keamanan
+
+- Password disimpan menggunakan hashing.
+- Endpoint pengelolaan buku dilindungi middleware autentikasi dan admin.
+- Token menggunakan Laravel Sanctum.
+- Token memiliki masa berlaku.
+- Validasi dilakukan pada backend.
+- File `.env` dan database SQLite lokal dikecualikan dari repository.
+
+## 📁 Struktur Folder Utama
+
+```text
+pustaka-literasi/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   ├── Middleware/
+│   │   ├── Requests/
+│   │   └── Resources/
+│   └── Models/
+├── bootstrap/
+├── config/
+├── database/
+│   ├── migrations/
+│   └── seeders/
+├── public/
+│   └── js/
+│       └── pustaka.js
+├── resources/
+│   └── views/
+│       └── books/
+│           └── index.blade.php
+├── routes/
+│   ├── api.php
+│   └── web.php
+├── .env.example
+├── composer.json
+└── README.md
+```
+
+## 🧪 Pengujian
+
+Pengujian API dilakukan menggunakan Postman, meliputi:
+
+- Pengambilan daftar dan detail buku.
+- Pencarian serta filter buku.
+- Pagination.
+- Login dan logout.
+- Pengujian token.
+- Pengujian hak akses admin dan anggota.
+- Penambahan, perubahan, dan penghapusan buku.
+- Validasi data.
+- Pencarian metadata Open Library.
+- Pengujian persistensi database.
+
+## 🌐 Repository
+
+GitHub:
+
+https://github.com/Heronimus-cloud/pustaka-literasi
+
+---
+
+**Pustaka Literasi — Jelajahi Dunia Literasi, Perluas Wawasan, Bangun Pengetahuan.**
